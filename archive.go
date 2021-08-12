@@ -7,6 +7,7 @@ import (
 
 	"github.com/gnames/gnar/ent/archive"
 	"github.com/gnames/gnar/io/gntar"
+	"github.com/gnames/gnar/io/gnzip"
 )
 
 func NewArchive(path string) (archive.Archive, error) {
@@ -32,5 +33,11 @@ func NewArchive(path string) (archive.Archive, error) {
 }
 
 func getArch(path, ext string) (archive.Archive, error) {
-	return nil, nil
+	switch ext {
+	case "zip":
+		return gnzip.New(path, ext)
+	}
+
+	err := fmt.Errorf("unknown archive '%s'", filepath.Base(path))
+	return nil, err
 }

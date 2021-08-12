@@ -16,6 +16,9 @@ func TestUnpack(t *testing.T) {
 	}{
 		{"tar.gz", "testdata/test.tar.gz", "testdata/test/a.txt"},
 		{"tar.xz", "testdata/test.tar.xz", "testdata/test/ab/a.txt"},
+		{"zip nodir", "testdata/test-0l.zip", "testdata/test/a.txt"},
+		{"zip 1l dir", "testdata/test-1l.zip", "testdata/test/test-1l/a.txt"},
+		{"zip 2l dir", "testdata/test-2l.zip", "testdata/test/test-2l/ab/a.txt"},
 	}
 	for _, v := range tests {
 		assert.False(t, gnsys.IsDir(testDir))
@@ -39,6 +42,8 @@ func TestPack(t *testing.T) {
 		{"tar.xz 1l", "testdata/test-1l", "testdata/test1l.tar.xz"},
 		{"tar.gz 2l", "testdata/test-2l", "testdata/tests2l.tar.gz"},
 		{"tar.xz 2l", "testdata/test-2l", "testdata/tests2l.tar.xz"},
+		{"zip 1l", "testdata/test-1l", "testdata/tests1l.zip"},
+		{"zip 2l", "testdata/test-2l", "testdata/tests2l.zip"},
 	}
 
 	for _, v := range tests {
